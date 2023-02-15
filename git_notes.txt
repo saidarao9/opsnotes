@@ -1,0 +1,158 @@
+
+DevOps Tools All
+
+1. GIT
+2. Docker
+3. CI/CD Tools
+4. Jenkins
+5. Ansible/Chef
+6. Kubernetes
+7. Terraform
+8. Liquibase
+9. AWS/Azure
+10.
+
+***GIT***
+
+1. What is git?
+* git is a version control system.
+* git helps you keep track of code changes
+* git is used to collaborate on code
+* git and github are different things
+
+2. Why git?
+* Over 70% of developers use Git!
+* Developers can work together from anywhere in the world
+* Developers can see the full history of the project
+* Developers can revert to earlier versions of a project
+
+3. Features of git
+* When a file is changed, added or deleted, it is considered modified
+* You select the modified files you want to stage
+* The stage files are committed, which prompts Git to store a permanent snapshot of the files.
+* Git allows you to see the full history of every commit
+* You can revert back to any previous commit
+* Git doesnot store a separate copy of each file in every commit, but keeps track of changes made in each commit.
+
+4. What is GitHub?
+* Git is not the same sa GitHub
+* GitHub makes tools that use git
+* GitHub is the largest host of source code in the world, and has been owned by Microsoft since 2018
+
+* COnfiguring git fo rthe first time
+$git config --global user.name "sachall"
+$git config --global user.email "saidharao.chalamalla@gmail.com"
+
+Geenral git features:
+$git init
+* git now knows that it should watch the folder you initiated it on. git creates a hidden folder to keep track of changes
+
+Staging Files/Adding Files to git repo:
+* staged files are files that are ready to be committed to the repository you are working on.
+* When you first add files files to an empty repository, they are all untracked. To get Git to track them, you need to stage them, or add them to the staging environment.
+$git add  "C:\Users\Saidha\git\git_notes.txt"
+* Staging all files in a folder
+$ git add --all or git add -AWS/Azure
+	
+Making a commit:
+* Adding commits keep track of our progress and changes we work. Git consider each commit change point or "save point". It is a point in the project you can go back to if you find
+  a bug or want to make a change.
+* When we commit, we should always include a message
+$ git commit -m"adding git_notes file"
+[master (root-commit) 78fe7da] adding git_notes file
+ 1 file changed, 79 insertions(+)
+ create mode 100644 git_notes.txt
+ 
+Git commit without a stage:
+* Sometimes, when you make small changes, using the staging environment seems like a watse of time. It is possible to commit chnages directly, skipping the staging environment.
+$ git commit -a -m"adding git_notes file"
+On branch master
+nothing to commit, working tree clean
+
+Status of Files and logs:
+$ git status
+On branch master
+nothing to commit, working tree clean
+
+File status in more compact way
+$git status --short
+
+Log of a File:
+* Log is used to view the history of commits for a repo
+$ git log
+commit 78fe7da6cf9429a75d67d99db19d78909081a237 (HEAD -> master)
+Author: sachall <saidharao.chalamalla@gmail.com>
+Date:   Wed Feb 15 13:46:47 2023 +0530
+
+    adding git_notes file
+	
+$ git log --oneline
+78fe7da (HEAD -> master) adding git_notes file
+
+Git Help:
+* If you ar ehaving trouble remembering commands or options  for commands , use git help
+$git <command> -help or 
+$git help --all
+
+Git Branching:
+* In Git, a branch is a new/separate version of the main repository.
+* Branches allow you to work on different parts of a project without impacting the main branch. 
+* When the work is complete, a branch can be merged with the main project.
+* We can even switch between branches and work on different projects without them intefering with each other.
+
+Making a new Git branch:
+$ git branch sample
+$ git branch
+* master
+  sample -- new brnach
+
+Switching to other branches:
+$ git checkout sample
+Switched to branch 'sample'
+Create new branch and switch to new branch
+$ git checkout -b sample1
+Switched to a new branch 'sample1'
+
+Deleting a Branch:
+$ git branch -d sample1
+Deleted branch sample1 (was 78fe7da).
+
+Merging two branches:
+* Its preferred to change/switch to master branch before any branch needs to be merged with it.
+$ git merge sample
+Already up to date.
+***********************************************
+*** Working with GitHub:****
+* create a GitHub account to create your remote repositories. Now, create a new repo where we will be uploading our files files from local repo.
+www.github.com - Create new account
+  
+
+
+
+
+Installing Git
+
+Windows:
+https://git-scm.com/download/win
+
+Linux:
+yum install git
+
+check version:
+$git --version
+
+Initialising a repo:
+Before using git in your project, need to initialize a Repository
+$git init
+Note: git created a hidden directory called .git, which stores all of the objects and refs that git uses and creates as part of projects history
+
+Staging:
+To commit, you need to specify the file whose changes you want to save. This is done by staging the changes. It is not required to stage all files you modified.
+$git add <file 01 path> <file 02 path>
+or
+$ git add .
+
+Commiting:
+Finally, come to committing the changes
+To save the changes ,
+$git commit -m "<message>"
