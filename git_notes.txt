@@ -125,34 +125,121 @@ Already up to date.
 *** Working with GitHub:****
 * create a GitHub account to create your remote repositories. Now, create a new repo where we will be uploading our files files from local repo.
 www.github.com - Create new account
-  
+
+Push local repo to GitHub:
+* Copy the URL or the link of the repo that we just created.
+$git remote add origin https://github.com/saidarao9/opsnotes.git
+Note: It will ask for GitHub login
+Note: Above specifies that we are adding a remote repository, with the specified URL, as on origin to our local git repo.
+FInally,  pushing our master branch to original URL(remote repo)  and set it as the default remote branch. 
+
+$ git push --set-upstream origin master
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Delta compression using up to 6 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 1.40 KiB | 1.40 MiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+remote:
+remote: Create a pull request for 'master' on GitHub by visiting:
+remote:      https://github.com/saidarao9/opsnotes/pull/new/master
+remote:
+To https://github.com/saidarao9/opsnotes.git
+ * [new branch]      master -> master
+branch 'master' set up to track 'origin/master'.   
+Go back into GitHub  adn see that repository has been updated.
+
+-- Pushing local repo to github after doing the above process at least once.
+First commit all the changes. Then push all changes to oour remote origin 
+$ git push origin
+Everything up-to-date
+
+** Pull local repo from GitHub:
+Git pull is used to pull all the changes from a remote repository into the branch we are working on. 
+It is a combination fetch and merge. Use it to update your local git
+$ git pull origin
+remote: Enumerating objects: 7, done.
+remote: Counting objects: 100% (7/7), done.
+remote: Compressing objects: 100% (4/4), done.
+remote: Total 7 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (7/7), 1.84 KiB | 134.00 KiB/s, done.
+From https://github.com/saidarao9/opsnotes
+ * [new branch]      main              -> origin/main
+ * [new branch]      saidarao9-patch-1 -> origin/saidarao9-patch-1
+Already up to date.
+
+**Pull Branch from GitHUb:
+-- Check which branches we have and where are we working at the moment.
+$ git branch
+* main
+-- See all local and remote branches:
+$ git branch -a
+* main
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/main
+  remotes/origin/saidarao9-patch-1
+-- Viewing only remote branches:
+$ git branch -r
+  origin/HEAD -> origin/main
+  origin/main
+  origin/saidarao9-patch-1
+
+** Push Branch to GitHub:
+-- create a new local branch which we will be pushing to GitHub.
+$ git checkout -b sample
+Switched to a new branch 'sample'
+
+$ git push origin sample
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 6 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 338 bytes | 338.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+remote:
+remote: Create a pull request for 'sample' on GitHub by visiting:
+remote:      https://github.com/saidarao9/opsnotes/pull/new/sample
+remote:
+To https://github.com/saidarao9/opsnotes.git
+ * [new branch]      sample -> sample
+
+** Git clone from GitHub:
+-- We can clone a forked repo from GitHub on our local repo. 
+-- Clone is a full copy of a repository, including all logging and versions of files.
+-- Move back to the original repository, and click the green code to get the URL to clone.
+$ git clone https://github.com/saidarao9/opsnotes.git
+$ git clone <copied URL> <folder name>
+
+
+***Git Undo:
+**Git Revert:
+-- Revert is the command we use when we want to take a previous commit and add it as a new commit, keeping the log intact.
+-- Forst thing, we need to find the point we want to return to. To do that, we need to go through the log 
+-- To avoid the long log list, use --oneline option, will give one line per commit
+   1. The first seven characters of the commit hash
+   2. The commit message
+**Git Revert HEAD:
+-- Revert the latest commit using 'git revert head' (revert the latest change, and then commit).
+-- By adding the option --no-edit, we can skip commit message editor
+$git revert HEAD --no-edit
+**Git revert to any commit:
+-- To revert to earlier commits, use 'git revert HEAD~x' (X being a number. 1 going back one more, 2 going back 2 more, etc).
+
+***Git reset:
+-- reset is the command we use when we want to move the repository back to a previous commit, discarding any changes made after that commit.
+-- First, get the seven characters of the commit hash from the log for the commit taht you want to go back for.
+-- Then we reset our repository back to the specific commit using 'git reset commithash' (commithash being first 7 characters of commit).
+$ git reset <commithash>
+** Git undo reset:
+-- Even though the commits are no longer showing up in the log, it is not removed from the git. 
+
+**Git amend:
+-- commit --amend is used to modify the most recent commit. It combines changes in the staging environment with the lastet commit, and creates a new commit.
+-- This new commit replaces the latest commit entirely.
+-- One of the simplest things you can do with --amend is to change a commit message.
+$ git commit --amend -m “<Commit Message>”
 
 
 
 
-Installing Git
 
-Windows:
-https://git-scm.com/download/win
-
-Linux:
-yum install git
-
-check version:
-$git --version
-
-Initialising a repo:
-Before using git in your project, need to initialize a Repository
-$git init
-Note: git created a hidden directory called .git, which stores all of the objects and refs that git uses and creates as part of projects history
-
-Staging:
-To commit, you need to specify the file whose changes you want to save. This is done by staging the changes. It is not required to stage all files you modified.
-$git add <file 01 path> <file 02 path>
-or
-$ git add .
-
-Commiting:
-Finally, come to committing the changes
-To save the changes ,
-$git commit -m "<message>"
