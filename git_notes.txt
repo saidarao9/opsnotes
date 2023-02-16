@@ -88,6 +88,70 @@ Date:   Wed Feb 15 13:46:47 2023 +0530
 	
 $ git log --oneline
 78fe7da (HEAD -> master) adding git_notes file
+$git log -2 --oneline
+
+$git log --decorate --oneline --graph
+Note: Since above is big command, you can assign an alias
+$git config --global alias.LoL "log --decorate --oneline --graph"
+$git LoL
+Log Search:
+$git log -G"#define SAMPLES"
+Group by author name:
+$ git shortlog
+saidarao9 (7):
+      Initial commit
+      Updating Readme fiel
+      Merge pull request #1 from saidarao9/saidarao9-patch-1
+      adding git notes file
+      commit test.txt
+      Merge pull request #2 from saidarao9/sample
+      git notes updated
+$ git shortlog -s
+     7  saidarao9
+
+-- Searching commit string in git log
+$git log --all --grep "removed file"
+$ git log --all --grep "test.txt"
+commit 74cbb9b80795f3a680c63bbc3da91783aab4ec42
+Merge: 7da0c10 3faddfe
+Author: saidarao9 <125445154+saidarao9@users.noreply.github.com>
+Date:   Wed Feb 15 15:45:58 2023 +0530
+
+    Merge pull request #2 from saidarao9/sample
+
+    commit test.txt
+
+commit 3faddfe5670d383a6e3331a8ddc1b611d0a33d82 (origin/sample, sample)
+Author: saidarao9 <saidharao.chalamalla@gmail.com>
+Date:   Wed Feb 15 15:38:18 2023 +0530
+
+    commit test.txt
+
+--Filter logs
+$ git log --after '3 days ago'
+$ git log --after 2022-12-23
+$git log author=authorname
+$git log --patch 
+$ git log --stat (showing committed files)
+
+$ git show 4f9b50a
+commit 4f9b50a6b2d79078bfd7fa4a54181d3cfdc1a8e7
+Author: saidarao9 <125445154+saidarao9@users.noreply.github.com>
+Date:   Wed Feb 15 14:21:17 2023 +0530
+
+    Initial commit
+
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..e0376a3
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,2 @@
++# opsnotes
++DevOps-Notes
+
+
+
 
 Git Help:
 * If you ar ehaving trouble remembering commands or options  for commands , use git help
@@ -238,6 +302,91 @@ $ git reset <commithash>
 -- This new commit replaces the latest commit entirely.
 -- One of the simplest things you can do with --amend is to change a commit message.
 $ git commit --amend -m “<Commit Message>”
+
+************************************************************************************************************
+Setting up of username and mail
+
+***Commands:
+$ git --version
+git version 2.39.2.windows.1
+
+On Unix 
+which git
+
+-- create an empty git repository
+$git init
+
+$git status
+$git add <file path>
+$git add
+$git commit -m"initial commit"
+-- To add a new remote git
+$git remote add origin <Remote URL Link>
+
+-- Clone a repository
+cd <path where u would like the clone to create a directory>
+$git clone https://github.com/saidarao9/opsnotes.git
+-- To specify a different name of the directory
+$git clone https://github.com/saidarao9/opsnotes.git MyFolder
+NOte: Can also use ssh version of the git
+$git clone git@github.com:saidarao9/opsnotes.git
+-- To clone a bitbucket project
+$git clone https://yourusername@bitbucket.org/username/projectname.git
+
+-- Sharing a code
+* To share your code, you create a repository on a remote server to which you will copy your local repository
+*On the remote server
+$git init --bare /pat/to/repo.git
+* On the local machine
+$git remote add origin ssh://username@server:/path/to/repo.git
+* Copy local repository to remote
+$git push --set-upstream origin master
+
+-- Setting your username and email
+$git config --global user.name "username"
+$git config --global user.email mail@example.com
+Note: This will store setting in your user's .gitconfig file ex: %USERPROFILE%\.gitconfig
+
+-- To declare an identity for a single repository , use git config inside a repo
+$ git config user.email saidha.dba10@gmail.com
+$ git config user.name "saidarao9"
+NOte: It will stores inside repo .git/config file
+-- Remove a global identity
+$git config --global --remove-section user.name
+$git config --global --remove-section user.mail
+-- To force git to look for your identity only within a repository's settings, not global config
+$git config --global user.useConfigOnly true
+
+-- Setting up the upstream remote
+* Check the remote names 
+$ git remote -v
+origin  https://github.com/saidarao9/opsnotes.git (fetch)
+origin  https://github.com/saidarao9/opsnotes.git (push)
+Add upstream if not available
+$ git remote add upstream  https://github.com/saidarao9/opsnotes.git
+$ git remote -v
+origin  https://github.com/saidarao9/opsnotes.git (fetch)
+origin  https://github.com/saidarao9/opsnotes.git (push)
+upstream        https://github.com/saidarao9/opsnotes.git (fetch)
+upstream        https://github.com/saidarao9/opsnotes.git (push)
+
+
+--Changing Git Remote URL
+--Checking
+$git remote -v
+$git remote set-url origin https://github.com/saidarao9/opsnotes1.git
+
+-- Removing Local copies of Deleted remote branches
+-If a remote branch has been deleted, your local repository has to be told to prune the reference to it.
+-To prune deleted branches from a specific remote 
+$ git fetch https://github.com/saidarao9/opsnotes.git --prune
+From https://github.com/saidarao9/opsnotes
+ * branch            HEAD       -> FETCH_HEAD
+$git fetch --all --prune
+
+-- Displaying commit history graphically with gitk
+$gitk
+
 
 
 
