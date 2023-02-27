@@ -1,16 +1,7 @@
 
 DevOps Tools All
 
-1. GIT
-2. Docker
-3. CI/CD Tools
-4. Jenkins
-5. Ansible/Chef
-6. Kubernetes
-7. Terraform
-8. Liquibase
-9. AWS/Azure
-10.
+
 
 ***GIT***
 
